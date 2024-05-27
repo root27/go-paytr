@@ -14,6 +14,10 @@ import (
 	"github.com/gorilla/schema"
 )
 
+func (p *Payment) BasketConfig() {
+
+}
+
 func (p *Payment) GenerateToken(merchantKey, merchantSalt string) string {
 
 	hashedStr := p.MerchantID + p.UserIP + p.MerchantOid + p.Email + strconv.Itoa(p.TotalAmount) + p.Basket +

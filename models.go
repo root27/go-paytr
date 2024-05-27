@@ -10,6 +10,7 @@ type Payment struct {
 	TotalAmount    int    `schema:"payment_amount"`
 	Currency       string `schema:"currenct"`
 	Basket         string `schema:"user_basket"`
+	CartData       []Cart `schema:"-"`
 	NoInstallment  int    `schema:"no_installment"`
 	MaxInstallment int    `schema:"max_installment"`
 	PaytrToken     string `schema:"paytr_token"`
@@ -45,4 +46,12 @@ type CallbackRequest struct {
 	PaymentType       string `schema:"payment_type"`
 	Currency          string `schema:"currency"`
 	PaymentAmount     int    `schema:"payment_amount"`
+}
+
+//NOTE: Basket Configuration
+
+type Cart struct {
+	Name   string
+	Price  int
+	Amount int
 }
