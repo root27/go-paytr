@@ -82,6 +82,8 @@ func (p *Payment) GetIframe() (PaytrResponse, error) {
 
 	}
 
+	log.Println(resBody)
+
 	json.Unmarshal(resBody, &response)
 
 	return response, nil
