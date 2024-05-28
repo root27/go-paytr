@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	PORT = 6969
+	PORT = "6969"
 )
 
 func main() {
@@ -19,7 +19,7 @@ func main() {
 
 	log.Println("Test server is running port ", PORT)
 
-	log.Fatal(http.ListenAndServe(":6969", r))
+	log.Fatal(http.ListenAndServe(":"+PORT, r))
 
 }
 
@@ -50,8 +50,6 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	log.Printf("basketData: %v", basketData)
-
 	p := paytr.Payment{
 
 		MerchantID:    "272972",
@@ -74,8 +72,22 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 		Lang:          "tr",
 	}
 
-	p.GenerateToken(p.MerchantKey, p.MerchantSalt)
+	p.BasketConfig(basketData)
 
+	paytrToken := p.GenerateToken(p.MerchantKey, p.MerchantSalt)
+
+	log.Println(paytrToken)
+
+	token, err := p.GetIframe()
+
+	if err != nil {
+
+		log.Printf("Error fetching iframe: %s\n", err)
+
+		return
+	}
+
+	log.Println(token)
 }
 
 type Request struct {

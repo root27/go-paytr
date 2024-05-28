@@ -2,3 +2,5 @@ github.com/gorilla/schema v1.3.0 h1:rbciOzXAx3IB8stEFnfTwO3sYa6EWlQk79XdyustPDA=
 github.com/gorilla/schema v1.3.0/go.mod h1:Dg5SSm5PV60mhF2NFaTV1xuYYj8tV8NOPRo4FggUMnM=
 github.com/root27/go-paytr v0.0.0-20240527133303-8b0dced1c3ce h1:nE2nENikJwHVC3eylmib4E9feLFx+6Ox47erSHWpFXs=
 github.com/root27/go-paytr v0.0.0-20240527133303-8b0dced1c3ce/go.mod h1:koDjPoDJN46qYWxmLCuuwh9Q8ByWyEldfzTHhE+kbGw=
+github.com/root27/go-paytr v0.0.0-20240528101302-c46209ae911c h1:oGFqKACnnoo0Ycdr9ucdv9WA/apv3xZs9kk9MzytyBs=
+github.com/root27/go-paytr v0.0.0-20240528101302-c46209ae911c/go.mod h1:koDjPoDJN46qYWxmLCuuwh9Q8ByWyEldfzTHhE+kbGw=
