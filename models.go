@@ -8,7 +8,7 @@ type Payment struct {
 	MerchantOid    string `schema:"merchant_oid"`
 	Email          string `schema:"email"`
 	TotalAmount    int    `schema:"payment_amount"`
-	Currency       string `schema:"currenct"`
+	Currency       string `schema:"currency"`
 	Basket         string `schema:"user_basket"`
 	NoInstallment  int    `schema:"no_installment"`
 	MaxInstallment int    `schema:"max_installment"`
