@@ -14,7 +14,11 @@ import (
 	"github.com/gorilla/schema"
 )
 
-func (p *Payment) BasketConfig() {
+func (p *Payment) BasketConfig(cart [][]any) {
+
+	cartbytes, _ := json.Marshal(cart)
+
+	p.Basket = base64.StdEncoding.EncodeToString(cartbytes)
 
 }
 
