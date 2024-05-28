@@ -52,6 +52,8 @@ func (p *Payment) GetIframe() (PaytrResponse, error) {
 
 	err := encoder.Encode(p, formData)
 
+	log.Println(formData)
+
 	if err != nil {
 
 		log.Println("Error encode form data: ", err)
@@ -81,8 +83,6 @@ func (p *Payment) GetIframe() (PaytrResponse, error) {
 		return response, err
 
 	}
-
-	log.Println(resBody)
 
 	json.Unmarshal(resBody, &response)
 

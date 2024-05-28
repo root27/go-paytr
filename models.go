@@ -27,7 +27,7 @@ type Payment struct {
 //NOTE: Iframe token response
 
 type PaytrResponse struct {
-	Status string
+	Status int
 	Token  string
 	Reason string
 }

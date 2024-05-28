@@ -4,5 +4,5 @@ go 1.22.1
 
 require (
 	github.com/gorilla/schema v1.3.0 // indirect
-	github.com/root27/go-paytr v0.0.0-20240528101302-c46209ae911c // indirect
+	github.com/root27/go-paytr v0.0.0-20240528120618-3653291bf8cf // indirect
 )
