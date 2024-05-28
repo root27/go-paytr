@@ -10,3 +10,5 @@ github.com/root27/go-paytr v0.0.0-20240528121535-1ead7143bd7c h1:z3TzxzPEMVjGTZK
 github.com/root27/go-paytr v0.0.0-20240528121535-1ead7143bd7c/go.mod h1:koDjPoDJN46qYWxmLCuuwh9Q8ByWyEldfzTHhE+kbGw=
 github.com/root27/go-paytr v0.0.0-20240528121729-bb137096e119 h1:EBa/+HQPXbVY1kUjbgVcaSSekcWW8hpacO+3L4+Zi1Q=
 github.com/root27/go-paytr v0.0.0-20240528121729-bb137096e119/go.mod h1:koDjPoDJN46qYWxmLCuuwh9Q8ByWyEldfzTHhE+kbGw=
+github.com/root27/go-paytr v0.0.0-20240528121903-ae0c656d549d h1:IGuPZRfLn0rsje6LUlCnPTvSlX9B46dB47pE2CcApx4=
+github.com/root27/go-paytr v0.0.0-20240528121903-ae0c656d549d/go.mod h1:koDjPoDJN46qYWxmLCuuwh9Q8ByWyEldfzTHhE+kbGw=

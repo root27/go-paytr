@@ -74,9 +74,7 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 
 	p.BasketConfig(basketData)
 
-	paytrToken := p.GenerateToken(p.MerchantKey, p.MerchantSalt)
-
-	log.Println(paytrToken)
+	p.GenerateToken(p.MerchantKey, p.MerchantSalt)
 
 	token, err := p.GetIframe()
 
