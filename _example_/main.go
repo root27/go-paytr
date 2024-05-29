@@ -28,7 +28,6 @@ func main() {
 }
 
 func handlePayment(w http.ResponseWriter, r *http.Request) {
-
 	var req Request
 
 	var basketData [][]any
