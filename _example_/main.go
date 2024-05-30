@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"log"
-	"net/http"
-
 	"github.com/gorilla/schema"
 	"github.com/root27/go-paytr"
+	"log"
+	"net/http"
+	"os"
 )
 
 var (
@@ -53,22 +53,25 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 
 	}
 
+	var email, username, useraddress, userIP, userPhone, merchantOid string
+	var totalAmount int
+
 	p := paytr.Payment{
 
-		MerchantID:    "272972",
-		MerchantKey:   "fKbPJLPc2UtyUNet",
-		MerchantSalt:  "gTp58ZLH7Wjhxrhi",
-		UserIP:        "78.163.140.60",
-		MerchantOid:   "test123",
-		Email:         "test@test.com",
-		TotalAmount:   10 * 100,
+		MerchantID:    os.Getenv("merchantId"),
+		MerchantKey:   os.Getenv("merchantKey"),
+		MerchantSalt:  os.Getenv("merchantSalt"),
+		UserIP:        userIP,
+		MerchantOid:   merchantOid,
+		Email:         email,
+		TotalAmount:   totalAmount,
 		Currency:      "TL",
 		NoInstallment: 1,
-		UserName:      "test",
-		UserAddress:   "test address",
-		UserPhone:     "123345567",
-		OkUrl:         "https://apps.uniqgene.com/checkout",
-		FailUrl:       "https://apps.uniqgene.com/",
+		UserName:      username,
+		UserAddress:   useraddress,
+		UserPhone:     userPhone,
+		OkUrl:         os.Getenv("okurl"),
+		FailUrl:       os.Getenv("failurl"),
 		TestMode:      "1",
 		DebugOn:       0,
 		Timeout:       30,
@@ -122,10 +125,11 @@ func handleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	valid := payment.IsValid(merchantKey, merchantSalt)
+	valid := payment.IsValid(os.Getenv("merchantKey"), os.Getenv("merchantSalt"))
 
 	if !valid {
 
+		//NOTE:Payment Hash not matched. Error handling
 		return
 
 	}
