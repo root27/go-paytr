@@ -7,6 +7,8 @@ import (
 	"strconv"
 )
 
+//NOTE: Payment hash comparison function for paytr callback
+
 func (c *CallbackRequest) IsValid(merchantKey, merchantSalt string) bool {
 
 	tokenStr := c.MerchantOid + merchantSalt + c.Status + strconv.Itoa(c.TotalAmount)

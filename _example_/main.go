@@ -120,8 +120,6 @@ func handleCallback(w http.ResponseWriter, r *http.Request) {
 
 		log.Printf("Error decoding postform:%s\n", err.Error())
 
-		http.Error(w, "Error decoding postform", http.StatusInternalServerError)
-
 		return
 	}
 

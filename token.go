@@ -14,6 +14,8 @@ import (
 	"github.com/gorilla/schema"
 )
 
+//NOTE: Basket data base64 encoding
+
 func (p *Payment) BasketConfig(cart [][]any) {
 
 	cartbytes, _ := json.Marshal(cart)
@@ -21,6 +23,8 @@ func (p *Payment) BasketConfig(cart [][]any) {
 	p.Basket = base64.StdEncoding.EncodeToString(cartbytes)
 
 }
+
+//NOTE: Token generation for payment process
 
 func (p *Payment) GenerateToken(merchantKey, merchantSalt string) string {
 
@@ -41,6 +45,8 @@ func (p *Payment) GenerateToken(merchantKey, merchantSalt string) string {
 	return p.PaytrToken
 
 }
+
+//NOTE: Get Iframe to show payment page in client side
 
 func (p *Payment) GetIframe() (PaytrResponse, error) {
 
