@@ -2,8 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
 	"github.com/root27/go-paytr"
+	_ "github.com/root27/test-pay/docs"
+	"github.com/swaggo/http-swagger"
 	"log"
 	"net/http"
 	"os"
@@ -13,13 +16,20 @@ var (
 	PORT = "6969"
 )
 
+// @title API Docs
+// @description Payment API Documentation
+// @version 0.1
+// @host http://localhost:6969
+// @BasePath /
 func main() {
 
-	r := http.NewServeMux()
+	r := mux.NewRouter()
 
 	r.HandleFunc("/payment", handlePayment)
 
 	r.HandleFunc("/paymentCallback", handleCallback)
+
+	r.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
 	log.Println("Test server is running port ", PORT)
 
@@ -27,6 +37,14 @@ func main() {
 
 }
 
+// @Payment godoc
+// @Summary Payment request process
+// @Description Request payment to get iframe token
+// @Accept json
+// @Produce json
+// @Failure 400 {object} HttpError
+// @Param data body Request true "Request payment"
+// @Router /payment [post]
 func handlePayment(w http.ResponseWriter, r *http.Request) {
 	var req Request
 
@@ -38,7 +56,12 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 
 		log.Println("Error parsing body: ", err)
 
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		resp := HttpError{
+			Code:    400,
+			Message: "Bad Request",
+		}
+
+		json.NewEncoder(w).Encode(resp)
 
 		return
 	}
@@ -147,8 +170,13 @@ func handleCallback(w http.ResponseWriter, r *http.Request) {
 
 }
 
+type HttpError struct {
+	Code    int    `json:"code" example:"400"`
+	Message string `json:"message" example:"bad request"`
+}
+
 type Request struct {
-	Data []Cart `json:"data"`
+	Data []Cart `json:"data" example:"[{name: test, price:123,amount:1 }]"`
 }
 
 type Cart struct {

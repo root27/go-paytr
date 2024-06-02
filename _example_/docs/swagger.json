@@ -1,0 +1,76 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Payment API Documentation",
+        "title": "API Docs",
+        "contact": {},
+        "version": "0.1"
+    },
+    "host": "http://localhost:6969",
+    "basePath": "/",
+    "paths": {
+        "/payment": {
+            "post": {
+                "description": "Request payment to get iframe token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Payment request process",
+                "parameters": [
+                    {
+                        "description": "Request payment",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.Request"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/main.HttpError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Cart": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                }
+            }
+        },
+        "main.HttpError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 400
+                },
+                "message": {
+                    "type": "string",
+                    "example": "bad request"
+                }
+            }
+        },
+        "main.Request": {
+            "type": "object"
+        }
+    }
+}

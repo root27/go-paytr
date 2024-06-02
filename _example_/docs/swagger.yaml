@@ -1,0 +1,50 @@
+basePath: /
+definitions:
+  main.Cart:
+    properties:
+      amount:
+        type: integer
+      name:
+        type: string
+      price:
+        type: integer
+    type: object
+  main.HttpError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: bad request
+        type: string
+    type: object
+  main.Request:
+    type: object
+host: http://localhost:6969
+info:
+  contact: {}
+  description: Payment API Documentation
+  title: API Docs
+  version: "0.1"
+paths:
+  /payment:
+    post:
+      consumes:
+      - application/json
+      description: Request payment to get iframe token
+      parameters:
+      - description: Request payment
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/main.Request'
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.HttpError'
+      summary: Payment request process
+swagger: "2.0"
