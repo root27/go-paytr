@@ -86,14 +86,34 @@
             }
         },
         "main.Request": {
-            "description": "Request represents the request payload containing multiple cart items",
+            "description": "Request represents the request payload containing multiple cart items, user name, user email, user address, user phone and total payment",
             "type": "object",
             "properties": {
-                "data": {
+                "basket": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/main.Cart"
                     }
+                },
+                "email": {
+                    "type": "string",
+                    "example": "test@test.com"
+                },
+                "totalPayment": {
+                    "type": "integer",
+                    "example": 1000
+                },
+                "user_address": {
+                    "type": "string",
+                    "example": "Victor Plains Suite 7389"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "john"
+                },
+                "userphone": {
+                    "type": "string",
+                    "example": "1-770-736-8031 x56442"
                 }
             }
         }

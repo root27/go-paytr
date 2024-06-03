@@ -44,7 +44,7 @@ func main() {
 // @Accept json
 // @Produce json
 // @Failure 400 {object} HttpError
-// @Param request body Request true "Request Body" example(Request{Data: []Cart{{Name: "test product", Price: 1000, Amount: 1}}})
+// @Param request body Request true "Request Body"
 // @Router /payment [post]
 func handlePayment(w http.ResponseWriter, r *http.Request) {
 	var req Request
@@ -67,7 +67,7 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for _, data := range req.Data {
+	for _, data := range req.Basket {
 
 		basketData = append(basketData, []any{
 			data.Name,
@@ -77,8 +77,13 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	var email, username, useraddress, userIP, userPhone, merchantOid string
-	var totalAmount int
+	// Get IP Address of user
+
+	userIP := GetIP(r)
+
+	// Order Number
+
+	merchantOid := "ORDER01"
 
 	p := paytr.Payment{
 
@@ -87,13 +92,13 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 		MerchantSalt:  os.Getenv("merchantSalt"),
 		UserIP:        userIP,
 		MerchantOid:   merchantOid,
-		Email:         email,
-		TotalAmount:   totalAmount,
+		Email:         req.Email,
+		TotalAmount:   req.TotalPayment, //TotalPayment indicates the 100 * total cost
 		Currency:      "TL",
 		NoInstallment: 1,
-		UserName:      username,
-		UserAddress:   useraddress,
-		UserPhone:     userPhone,
+		UserName:      req.UserName,
+		UserAddress:   req.UserAddress,
+		UserPhone:     req.UserAddress,
 		OkUrl:         os.Getenv("okurl"),
 		FailUrl:       os.Getenv("failurl"),
 		TestMode:      "1",
@@ -174,14 +179,39 @@ func handleCallback(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func GetIP(r *http.Request) string {
+
+	IP := r.Header.Get("X-Real-IP")
+
+	if IP == "" {
+
+		IP = r.Header.Get("X-Forwarded-For")
+
+	}
+
+	if IP == "" {
+
+		IP = r.RemoteAddr
+
+	}
+
+	return IP
+
+}
+
 type HttpError struct {
 	Code    int    `json:"code" example:"400"`
 	Message string `json:"message" example:"bad request"`
 }
 
-// @description Request represents the request payload containing multiple cart items
+// @description Request represents the request payload containing multiple cart items, user name, user email, user address, user phone and total payment
 type Request struct {
-	Data []Cart `json:"data"`
+	Basket       []Cart `json:"basket"`
+	UserName     string `json:"username" example:"john"`
+	Email        string `json:"email" example:"test@test.com"`
+	UserAddress  string `json:"user_address" example:"Victor Plains Suite 7389"`
+	UserPhone    string `json:"userphone" example:"1-770-736-8031 x56442"`
+	TotalPayment int    `json:"totalPayment" example:"1000"`
 }
 
 // @description Cart represents a single item in the cart

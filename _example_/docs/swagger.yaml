@@ -23,12 +23,28 @@ definitions:
         type: string
     type: object
   main.Request:
-    description: Request represents the request payload containing multiple cart items
+    description: Request represents the request payload containing multiple cart items,
+      user name, user email, user address, user phone and total payment
     properties:
-      data:
+      basket:
         items:
           $ref: '#/definitions/main.Cart'
         type: array
+      email:
+        example: test@test.com
+        type: string
+      totalPayment:
+        example: 1000
+        type: integer
+      user_address:
+        example: Victor Plains Suite 7389
+        type: string
+      username:
+        example: john
+        type: string
+      userphone:
+        example: 1-770-736-8031 x56442
+        type: string
     type: object
 host: http://localhost:6969
 info:
