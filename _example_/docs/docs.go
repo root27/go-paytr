@@ -48,6 +48,15 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/paymentCallback": {
+            "post": {
+                "description": "Paytr Callback API (No request and response needed)",
+                "tags": [
+                    "Paytr Callback"
+                ],
+                "responses": {}
+            }
         }
     },
     "definitions": {

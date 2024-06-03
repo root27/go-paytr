@@ -120,6 +120,9 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 
 //NOTE: Paytr Callback API
 
+// @Tags Paytr Callback
+// @Description Paytr Callback API (No request and response needed)
+// @Router /paymentCallback [post]
 func handleCallback(w http.ResponseWriter, r *http.Request) {
 
 	err := r.ParseForm()

@@ -59,4 +59,10 @@ paths:
       summary: Payment request process
       tags:
       - Payment
+  /paymentCallback:
+    post:
+      description: Paytr Callback API (No request and response needed)
+      responses: {}
+      tags:
+      - Paytr Callback
 swagger: "2.0"
