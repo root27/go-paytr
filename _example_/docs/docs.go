@@ -24,11 +24,14 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Payment"
+                ],
                 "summary": "Payment request process",
                 "parameters": [
                     {
-                        "description": "Request payment",
-                        "name": "data",
+                        "description": "Request Body",
+                        "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -49,16 +52,20 @@ const docTemplate = `{
     },
     "definitions": {
         "main.Cart": {
+            "description": "Cart represents a single item in the cart",
             "type": "object",
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "test product"
                 },
                 "price": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1000
                 }
             }
         },
@@ -76,7 +83,16 @@ const docTemplate = `{
             }
         },
         "main.Request": {
-            "type": "object"
+            "description": "Request represents the request payload containing multiple cart items",
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.Cart"
+                    }
+                }
+            }
         }
     }
 }`
@@ -88,7 +104,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "API Docs",
-	Description:      "Payment API Documentation",
+	Description:      "Cart represents a single item in the cart",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

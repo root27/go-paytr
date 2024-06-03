@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Payment API Documentation",
+        "description": "Cart represents a single item in the cart",
         "title": "API Docs",
         "contact": {},
         "version": "0.1"
@@ -18,11 +18,14 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Payment"
+                ],
                 "summary": "Payment request process",
                 "parameters": [
                     {
-                        "description": "Request payment",
-                        "name": "data",
+                        "description": "Request Body",
+                        "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -43,16 +46,20 @@
     },
     "definitions": {
         "main.Cart": {
+            "description": "Cart represents a single item in the cart",
             "type": "object",
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "test product"
                 },
                 "price": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1000
                 }
             }
         },
@@ -70,7 +77,16 @@
             }
         },
         "main.Request": {
-            "type": "object"
+            "description": "Request represents the request payload containing multiple cart items",
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.Cart"
+                    }
+                }
+            }
         }
     }
 }

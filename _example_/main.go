@@ -40,10 +40,11 @@ func main() {
 // @Payment godoc
 // @Summary Payment request process
 // @Description Request payment to get iframe token
+// @Tags Payment
 // @Accept json
 // @Produce json
 // @Failure 400 {object} HttpError
-// @Param data body Request true "Request payment"
+// @Param request body Request true "Request Body" example(Request{Data: []Cart{{Name: "test product", Price: 1000, Amount: 1}}})
 // @Router /payment [post]
 func handlePayment(w http.ResponseWriter, r *http.Request) {
 	var req Request
@@ -175,12 +176,14 @@ type HttpError struct {
 	Message string `json:"message" example:"bad request"`
 }
 
+// @description Request represents the request payload containing multiple cart items
 type Request struct {
-	Data []Cart `json:"data" example:"[{name: test, price:123,amount:1 }]"`
+	Data []Cart `json:"data"`
 }
 
+// @description Cart represents a single item in the cart
 type Cart struct {
-	Name   string `json:"name"`
-	Price  int    `json:"price"`
-	Amount int    `json:"amount"`
+	Name   string `json:"name" example:"test product"`
+	Price  int    `json:"price" example:"1000"`
+	Amount int    `json:"amount" example:"1"`
 }

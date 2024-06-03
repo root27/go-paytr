@@ -1,12 +1,16 @@
 basePath: /
 definitions:
   main.Cart:
+    description: Cart represents a single item in the cart
     properties:
       amount:
+        example: 1
         type: integer
       name:
+        example: test product
         type: string
       price:
+        example: 1000
         type: integer
     type: object
   main.HttpError:
@@ -19,11 +23,17 @@ definitions:
         type: string
     type: object
   main.Request:
+    description: Request represents the request payload containing multiple cart items
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/main.Cart'
+        type: array
     type: object
 host: http://localhost:6969
 info:
   contact: {}
-  description: Payment API Documentation
+  description: Cart represents a single item in the cart
   title: API Docs
   version: "0.1"
 paths:
@@ -33,9 +43,9 @@ paths:
       - application/json
       description: Request payment to get iframe token
       parameters:
-      - description: Request payment
+      - description: Request Body
         in: body
-        name: data
+        name: request
         required: true
         schema:
           $ref: '#/definitions/main.Request'
@@ -47,4 +57,6 @@ paths:
           schema:
             $ref: '#/definitions/main.HttpError'
       summary: Payment request process
+      tags:
+      - Payment
 swagger: "2.0"
