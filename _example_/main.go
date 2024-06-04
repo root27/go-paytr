@@ -44,6 +44,7 @@ func main() {
 // @Accept json
 // @Produce json
 // @Failure 400 {object} HttpError
+// @Success 200 {object} HttpSuccess
 // @Param request body Request true "Request Body"
 // @Router /payment [post]
 func handlePayment(w http.ResponseWriter, r *http.Request) {
@@ -120,7 +121,14 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	//TODO: Return iframe token to client
-	log.Println(token)
+
+	success := HttpSuccess{
+		Code:    200,
+		Message: "Success payment process",
+		Iframe:  token.Token,
+	}
+
+	json.NewEncoder(w).Encode(success)
 }
 
 //NOTE: Paytr Callback API
@@ -199,6 +207,14 @@ func GetIP(r *http.Request) string {
 
 }
 
+// @description Success Response
+type HttpSuccess struct {
+	Code    int    `json:"code" example:"200"`
+	Message string `json:"message" example:"Success"`
+	Iframe  string `json:"iframe"`
+}
+
+// @description Error response
 type HttpError struct {
 	Code    int    `json:"code" example:"400"`
 	Message string `json:"message" example:"bad request"`

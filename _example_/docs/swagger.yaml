@@ -14,12 +14,25 @@ definitions:
         type: integer
     type: object
   main.HttpError:
+    description: Error response
     properties:
       code:
         example: 400
         type: integer
       message:
         example: bad request
+        type: string
+    type: object
+  main.HttpSuccess:
+    description: Success Response
+    properties:
+      code:
+        example: 200
+        type: integer
+      iframe:
+        type: string
+      message:
+        example: Success
         type: string
     type: object
   main.Request:
@@ -68,6 +81,10 @@ paths:
       produces:
       - application/json
       responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.HttpSuccess'
         "400":
           description: Bad Request
           schema:

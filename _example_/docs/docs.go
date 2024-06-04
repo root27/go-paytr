@@ -40,6 +40,12 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.HttpSuccess"
+                        }
+                    },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
@@ -79,6 +85,7 @@ const docTemplate = `{
             }
         },
         "main.HttpError": {
+            "description": "Error response",
             "type": "object",
             "properties": {
                 "code": {
@@ -88,6 +95,23 @@ const docTemplate = `{
                 "message": {
                     "type": "string",
                     "example": "bad request"
+                }
+            }
+        },
+        "main.HttpSuccess": {
+            "description": "Success Response",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "iframe": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Success"
                 }
             }
         },
