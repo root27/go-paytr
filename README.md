@@ -8,6 +8,6 @@ You can see example application in example folder.
 
 ## NOTE
 
-This is not officiall paytr package for golang.
+This is not official paytr package for golang.
 
 
