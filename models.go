@@ -35,6 +35,7 @@ type PaytrResponse struct {
 //NOTE: Paytr Callback
 
 type CallbackRequest struct {
+	MerchantID        string `schema:"merchant_id"`
 	MerchantOid       string `schema:"merchant_oid"`
 	Status            string `schema:"status"`
 	TotalAmount       int    `schema:"total_amount"`
