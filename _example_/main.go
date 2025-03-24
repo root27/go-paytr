@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
+	"github.com/joho/godotenv"
 	"github.com/root27/go-paytr"
 	_ "github.com/root27/test-pay/docs"
 	"github.com/swaggo/http-swagger"
@@ -22,6 +24,10 @@ var (
 // @host localhost:6969
 // @BasePath /
 func main() {
+
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	r := mux.NewRouter()
 
@@ -100,7 +106,7 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 		NoInstallment: 1,
 		UserName:      req.UserName,
 		UserAddress:   req.UserAddress,
-		UserPhone:     req.UserAddress,
+		UserPhone:     req.UserPhone,
 		OkUrl:         os.Getenv("okurl"),
 		FailUrl:       os.Getenv("failurl"),
 		TestMode:      "1",
@@ -115,13 +121,18 @@ func handlePayment(w http.ResponseWriter, r *http.Request) {
 
 	token, err := p.GetIframe()
 
-	if err != nil {
+	if err != nil || token.Reason != "" {
 
-		log.Printf("Error fetching iframe: %s\n", err)
+		error_response := HttpError{
+
+			Code:    400,
+			Message: fmt.Sprintf("Error getting token: %s", token.Reason),
+		}
+
+		json.NewEncoder(w).Encode(error_response)
 
 		return
 	}
-	//TODO: Return iframe token to client
 
 	success := HttpSuccess{
 		Code:    200,

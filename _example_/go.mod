@@ -5,9 +5,11 @@ go 1.22.1
 require (
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/schema v1.3.0
+	github.com/joho/godotenv v1.5.1
 	github.com/root27/go-paytr v0.0.0-20240528121903-ae0c656d549d
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/swaggo/swag v1.16.3
+
 )
 
 require (
