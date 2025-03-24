@@ -19,7 +19,7 @@ var (
 // @title API Docs
 // @description Payment API Documentation
 // @version 0.1
-// @host http://localhost:6969
+// @host localhost:6969
 // @BasePath /
 func main() {
 
@@ -48,6 +48,7 @@ func main() {
 // @Param request body Request true "Request Body"
 // @Router /payment [post]
 func handlePayment(w http.ResponseWriter, r *http.Request) {
+
 	var req Request
 
 	var basketData [][]any

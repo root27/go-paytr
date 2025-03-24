@@ -59,7 +59,7 @@ definitions:
         example: 1-770-736-8031 x56442
         type: string
     type: object
-host: http://localhost:6969
+host: localhost:6969
 info:
   contact: {}
   description: Cart represents a single item in the cart
